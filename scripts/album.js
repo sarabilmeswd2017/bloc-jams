@@ -28,6 +28,21 @@ var albumPicasso = {
      ]
  };
 
+var albumSimonandGarfunkel = {
+     title: 'Bridge Over Troubled Water',
+     artist: 'Simon and Garfunkel',
+     label: 'EM',
+     year: '1970',
+     albumArtUrl: 'assets/images/album_covers/botw_cover.jpg',
+     songs: [
+         { title: 'Bridge Over Troubled Water', duration: '1:01' },
+         { title: 'El Condor Pasa', duration: '5:01' },
+         { title: 'Cecilia', duration: '3:21'},
+         { title: 'Keep the Customer Satisfied', duration: '3:14' },
+         { title: 'The Boxer', duration: '2:15'}
+     ]
+ };
+
 var createSongRow = function(songNumber, songName, songLength){
 var template =
         '<tr class="album-view-song-item">'
@@ -40,8 +55,10 @@ var template =
      return template;
     };
 
+var currentlySelectedAlbum;
 var setCurrentAlbum = function(album) {
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
+ currentlySelectedAlbum = album;
+  var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
@@ -62,3 +79,16 @@ var setCurrentAlbum = function(album) {
 window.onload = function() {
      setCurrentAlbum(albumPicasso);
  };
+
+
+
+document.getElementsByClassName('album-cover-art')[0].addEventListener('click', function(event){
+  if(currentlySelectedAlbum == albumPicasso){
+       currentlySelectedAlbum = albumMarconi;
+    } else if (currentlySelectedAlbum == albumMarconi){
+        currentlySelectedAlbum = albumSimonandGarfunkel;
+    } else if (currentlySelectedAlbum == albumSimonandGarfunkel){
+        currentlySelectedAlbum = albumPicasso;
+    }
+    
+ } );
