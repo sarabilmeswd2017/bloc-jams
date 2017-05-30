@@ -33,7 +33,7 @@ var albumSimonandGarfunkel = {
       artist: 'Simon and Garfunkel',
       label: 'EM',
       year: '1970',
-     albumArtUrl: 'assets/images/album_covers/botw_cover.jpg',
+     albumArtUrl: 'assets/images/album_covers/simongarfunkel.jpeg',
       songs: [
           { title: 'Bridge Over Troubled Water', duration: '1:01' },
           { title: 'El Condor Pasa', duration: '5:01' },
@@ -54,14 +54,18 @@ var template =
  
      return template;
     };
-var currentlySelectedAlbum;
-var setCurrentAlbum = function(album) {
-     currentlySelectedAlbum = album;
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
+
+ var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
+/*var currentlySelectedAlbum;*/
+
+var setCurrentAlbum = function(album) {
+    /* currentlySelectedAlbum = album;*/
+   
     
     albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
@@ -78,7 +82,29 @@ var setCurrentAlbum = function(album) {
 window.onload = function() {
      setCurrentAlbum(albumPicasso);
     
-       document.getElementsByClassName('album-cover-art').addEventListener('click', function(event){
+    var albums = [albumPicasso, albumMarconi, albumSimonandGarfunkel];
+   var index = 1;
+albumImage.addEventListener('click', function(event){
+    setCurrentAlbum(albums[index]);
+    index++;
+    if(index == albums.length){
+        index = 0;
+    }
+    }); 
+    
+/*albumImage.addEventListener("click", function(event){
+   for(var i = 0;i < albums.length;i++){
+        setCurrentAlbum(albums[i]);
+   } if(i == albums.length){
+        i = 0;}
+});*/
+    
+    
+};
+    
+    
+    
+    /*       document.getElementsByClassName('album-cover-art').addEventListener('click', function(event){
   if(currentlySelectedAlbum == albumPicasso){
         currentlySelectedAlbum = albumMarconi;
      } else if (currentlySelectedAlbum == albumMarconi){
@@ -87,8 +113,8 @@ window.onload = function() {
          currentlySelectedAlbum = albumPicasso;
      }
      
-  } );
-    };
+  } );*/
+   
 
 
    
