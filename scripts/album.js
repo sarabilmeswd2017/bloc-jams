@@ -137,7 +137,7 @@ var songRows = document.getElementsByClassName('album-view-song-item');
 
 window.onload = function() {
      setCurrentAlbum(albumPicasso);
-
+     
   songListContainer.addEventListener('mouseover', function(event) {
          // #1
           if (event.target.parentElement.className === 'album-view-song-item') {
@@ -164,7 +164,6 @@ window.onload = function() {
             clickHandler(event.target);
          });
      }
-
 
     var albums = [albumPicasso, albumMarconi, albumSimonandGarfunkel];
          var index = 1;
