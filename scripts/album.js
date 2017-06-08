@@ -107,25 +107,40 @@ var updatePlayerBarSong = function() {
     $('.main-controls .play-pause').html(playerBarPauseButton);
 };
 
-var nextSong = function(){
+var nextSongandPreviousSong = function(){
   var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
+
+
+  if($nextButton){
     currentSongIndex++;
+  }
+  if($previousButton){
+      currentSongIndex--;
+  }
   if (currentSongIndex >= currentAlbum.songs.length) {
     currentSongIndex = 0;
-    }
+
+  } else if (currentSongIndex < 0) {
+      currentSongIndex = currentAlbum.songs.length -1;
+
+      }
   var lastSongNumber = currentlyPlayingSongNumber;
   currentlyPlayingSongNumber = currentSongIndex + 1;
   currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
   updatePlayerBarSong();
   var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
-   var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
-   $nextSongNumberCell.html(pauseButtonTemplate);
-   $lastSongNumberCell.html(lastSongNumber);
+    var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
+    $nextSongNumberCell.html(pauseButtonTemplate);
+    $lastSongNumberCell.html(lastSongNumber);
+    var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+    var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
+    $previousSongNumberCell.html(pauseButtonTemplate);
+    $lastSongNumberCell.html(lastSongNumber);
 };
 
-var previousSong = function(){
-  var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-    currentSongIndex--;
+/*var previousSong = function(){
+  var previousCurrentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
+    previousCurrentSongIndex--;
   if (currentSongIndex < 0) {
     currentSongIndex = currentAlbum.songs.length -1;
     }
@@ -138,7 +153,7 @@ var previousSong = function(){
    var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
    $previousSongNumberCell.html(pauseButtonTemplate);
    $lastSongNumberCell.html(lastSongNumber);
-};
+};*/
 
 /*var findParentByClassName = function(parentClass, child){
   var findParent = child.parentNode;
@@ -170,8 +185,8 @@ var $nextButton = $('.main-controls .next');
 
 $(document).ready(function() {
   setCurrentAlbum(albumPicasso);
-  $previousButton.click(previousSong);
-  $nextButton.click(nextSong);
+  $previousButton.click(nextSongandPreviousSong);
+  $nextButton.click(nextSongandPreviousSong);
 });
 
 
