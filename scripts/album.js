@@ -110,13 +110,12 @@ var updatePlayerBarSong = function() {
 var nextSongandPreviousSong = function(){
   var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
 
-
-  if($nextButton){
+  if(currentlyPlayingSongNumber > lastSongNumber){
     currentSongIndex++;
+  } else{
+    currentSongIndex--;
   }
-  if($previousButton){
-      currentSongIndex--;
-  }
+
   if (currentSongIndex >= currentAlbum.songs.length) {
     currentSongIndex = 0;
 
@@ -124,8 +123,9 @@ var nextSongandPreviousSong = function(){
       currentSongIndex = currentAlbum.songs.length -1;
 
       }
-  var lastSongNumber = currentlyPlayingSongNumber;
+
   currentlyPlayingSongNumber = currentSongIndex + 1;
+  var lastSongNumber = currentlyPlayingSongNumber;
   currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
   updatePlayerBarSong();
   var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
