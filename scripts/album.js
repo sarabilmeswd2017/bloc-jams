@@ -1,6 +1,7 @@
 
 
 var createSongRow = function(songNumber, songName, songLength){
+  songLength = filterTimeCode(songLength);
   var template =
   '<tr class="album-view-song-item">'
   + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
@@ -37,6 +38,7 @@ var createSongRow = function(songNumber, songName, songLength){
          $('.main-controls .play-pause').html(playerBarPauseButton);
          currentSoundFile.play();
          updateSeekBarWhileSongPlays();
+
       } else{
          $(this).html(playButtonTemplate);
          $('.main-controls .play-pause').html(playerBarPlayButton);
@@ -102,6 +104,8 @@ var updateSeekBarWhileSongPlays = function() {
       var seekBarFillRatio = this.getTime() / this.getDuration();
       var $seekBar = $('.seek-control .seek-bar');
       updateSeekPercentage($seekBar, seekBarFillRatio);
+      setCurrentTimeInPlayerBar(filterTimeCode(currentSoundFile.getTime()));
+      setTotalTimeInPlayerBar(filterTimeCode(currentSoundFile.getDuration()));
     });
   }
 };
@@ -157,17 +161,32 @@ var setupSeekBars = function() {
   });
 };
 
+var setCurrentTimeInPlayerBar = function(currentTime){
+  $('.current-time').text(currentTime);
+};
+
+var setTotalTimeInPlayerBar = function(totalTime){
+  $('.total-time').text(totalTime);
+};
+
+var filterTimeCode = function(timeInSeconds){
+  var secondsInNumberForm = parseFloat(timeInSeconds);
+  var wholeMinutes = Math.floor(secondsInNumberForm / 60);
+  var leftoverSeconds = Math.floor(secondsInNumberForm - (wholeMinutes * 60));
+  return wholeMinutes + ":" + leftoverSeconds;
+};
 
 var trackIndex = function(album, song) {
      return album.songs.indexOf(song);
  };
 
 var updatePlayerBarSong = function() {
-
+    /*setTotalTimeInPlayerBar(filterTimeCode(currentSoundFile.getDuration()));*/
     $('.currently-playing .song-name').text(currentSongFromAlbum.title);
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     $('.main-controls .play-pause').html(playerBarPauseButton);
+
 };
 
 var nextSong = function(){
