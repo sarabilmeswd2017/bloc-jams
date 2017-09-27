@@ -1,0 +1,20 @@
+{
+  "name": "bloc-frontend-project-starter",
+  "version": "1.0.0",
+  "description": "\"Really cool Bloc Jams project\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarabilmeswd2017/bloc-jams.git"
+  },
+  "keywords": [],
+  "author": "Sara Bilmes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarabilmeswd2017/bloc-jams/issues"
+  },
+  "homepage": "https://github.com/sarabilmeswd2017/bloc-jams#readme"
+}
